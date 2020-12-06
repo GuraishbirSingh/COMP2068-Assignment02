@@ -9,6 +9,21 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+//connecting to mongoose database
+const mongoose = require('mongoose')
+mongoose.connect('mongodb+srv://GuraishbirSingh:Boparaimongo307@clusterstoreinventory.l74ss.mongodb.net/Products',
+{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(
+  (res) => {
+    console.log(connected)
+  }
+).catch(() => {
+  console.log('Error')
+})
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
