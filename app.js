@@ -14,10 +14,10 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://GuraishbirSingh:Boparaimongo307@clusterstoreinventory.l74ss.mongodb.net/Products',
 {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 }).then(
   (res) => {
-    console.log(connected)
+    console.log('connected')
   }
 ).catch(() => {
   console.log('Error')
