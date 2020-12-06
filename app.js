@@ -11,7 +11,8 @@ var app = express();
 
 //connecting to mongoose database
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://GuraishbirSingh:Boparaimongo307@clusterstoreinventory.l74ss.mongodb.net/Products',
+const globals = require('./config/globals')
+mongoose.connect(globals.db,
 {
   useNewUrlParser: true,
   useUnifiedTopology: true
