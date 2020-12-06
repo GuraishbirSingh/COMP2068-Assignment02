@@ -23,5 +23,30 @@ router.get('/', function (req, res, next) {
      })
 })
 
+//GET products add view
+router.get('/add', (req, res, next) => {
+   res.render('products/add')
+})
+
+//POST products / add form submission
+router.post('/add', (req, res, next) => {
+
+   //use MONGOOSE to try to save a new product
+   Product.create({
+      name: req.body.name,
+      quantity: req.body.quantity,
+      department: req.body.department
+   }, (err, product) => {
+      if (err) {
+         console.log(err)
+         res.end(err)
+      }
+      else {
+         res.redirect('/products')
+      }
+   })
+})
+
+
 //exposes this file as public
 module.exports = router;
