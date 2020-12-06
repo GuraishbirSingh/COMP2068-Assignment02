@@ -8,15 +8,11 @@ const productschema = new mongoose.Schema(
          required: 'Name is Required',
          trim: true
       },
-      Quantity: Number,
-      Department:{
+      quantity: Number,
+      department:{
          type: String,
          required: 'Department name is Required',
          trim: true
-      },
-      Instock: {
-         type: Boolean,
-         default: No
       }
    })
 
