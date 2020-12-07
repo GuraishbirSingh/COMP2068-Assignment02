@@ -64,5 +64,52 @@ router.get('/delete/:_id', (req, res, next) => {
    })
 })
 
+//Get products/edit
+router.get('/edit/:_id', (req, res, next) => {
+   //storing id parameter
+   var _id = req.params._id
+   //use the selected id parameter to edit 
+   Product.findById(_id,(err,products) => {
+      if(err)
+      {
+         console.log(err)
+         res.end(err)
+      }
+      else
+      {
+      res.render('products/edit',
+          { products: products  })
+      }
+   })
+})
+
+
+
+// POST /products/edit
+router.post('/edit/:_id', (req, res, next) =>
+{
+   var _id = req.params._id
+
+   //instantiate a Product object with the new values from the form submission
+   var product = new Product({
+      _id: _id,
+      name: req.body.name,
+      quantity: req.body.quantity,
+      department: req.body.department
+   })
+   //update document with selected id, passing new product object to replace old values
+   Product.update({_id: _id}, product, (err) => {
+      if(err)
+      {
+         console.log(err)
+         res.end(err)
+      }
+      else
+      {
+         res.redirect('/products')
+      }
+   })
+})
+
 //exposes this file as public
 module.exports = router;
