@@ -47,6 +47,22 @@ router.post('/add', (req, res, next) => {
    })
 })
 
+//GET products delete
+router.get('/delete/:_id', (req, res, next) => {
+   
+   //store the selected id in a local variable
+   var _id = req.params._id;
+   //Use Mongoose to delete the selected document from the DB
+   Product.remove({ _id: _id }, (err) => {
+      if (err) {
+         console.log(err)
+         res.end(err)
+      }
+      else {
+         res.redirect('/products')
+      }
+   })
+})
 
 //exposes this file as public
 module.exports = router;

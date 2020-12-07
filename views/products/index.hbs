@@ -13,7 +13,11 @@
     <tr>
         <td> {{this.name}} </td>
         <td> {{this.quantity}} </td>
-        <td> {{this.department}} </td>   
+        <td> {{this.department}} </td>  
+        <td>
+            <a href="/tasks/edit/{{ this._id }}"> Edit </a>|
+            <a href="/products/delete/{{ this._id }}" class="test-danger delete"> Delete </a>
+        </td> 
     </tr>
     {{/each}}
 
