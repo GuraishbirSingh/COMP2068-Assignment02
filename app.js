@@ -8,23 +8,50 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var productsRouter = require('./routes/products');
+//Ref for Auth
+const passport = require('passport')
+const session = require('express-session')
+//const localStategy = require('passport-local').Strategy
 
 var app = express();
 
-//connecting to mongoose database
+//Database try to connect and log a result
 const mongoose = require('mongoose')
 const globals = require('./config/globals')
-mongoose.connect(globals.db,
-{
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(
-  (res) => {
-    console.log('connected')
-  }
+mongoose.connect(globals.db,  //Change test at the end to tasks-v2, and password
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }).then(
+    (res) => {
+      console.log('Connected')
+    }
 ).catch(() => {
-  console.log('Error')
+  console.log('Error in connection')
 })
+
+//Passport Initialization
+//1. Configure app to manage sessions
+app.use(session({
+    secret: 'MyOwnSecret',
+    resave: true,
+    saveUninitialized:false
+}))
+
+//2.  Set up Passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+//3.  Link Passport to our User Model
+const User = require('./models/user')
+passport.use(User.createStrategy())
+
+//4. Set up Passport to Read /Write user data to the session object
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+
+
 
 
 // view engine setup

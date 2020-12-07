@@ -6,6 +6,15 @@ var router = express.Router();
 //Reference the product model
 const Product = require('../models/product')
 
+const passport = require('passport')
+
+//Authentication function 
+function isLoggedIn(req,res, next){
+    if(req.isAuthenticated()){
+        return next()
+    }
+    res.redirect('/login')
+}
 
 /* GET product Index View. */
 router.get('/', function (req, res, next) {
@@ -17,19 +26,21 @@ router.get('/', function (req, res, next) {
         else {
            res.render('products/index',
               {
-                 products: products
+                 products: products,
+                 user: req.user
               })
         }
      })
 })
 
 //GET products add view
-router.get('/add', (req, res, next) => {
-   res.render('products/add')
+router.get('/add', isLoggedIn,(req, res, next) => {
+   res.render('products/add',
+   {user: req.user})
 })
 
 //POST products / add form submission
-router.post('/add', (req, res, next) => {
+router.post('/add', isLoggedIn,(req, res, next) => {
 
    //use MONGOOSE to try to save a new product
    Product.create({
@@ -48,7 +59,7 @@ router.post('/add', (req, res, next) => {
 })
 
 //GET products delete
-router.get('/delete/:_id', (req, res, next) => {
+router.get('/delete/:_id', isLoggedIn,(req, res, next) => {
    
    //store the selected id in a local variable
    var _id = req.params._id;
@@ -65,7 +76,7 @@ router.get('/delete/:_id', (req, res, next) => {
 })
 
 //Get products/edit
-router.get('/edit/:_id', (req, res, next) => {
+router.get('/edit/:_id', isLoggedIn, (req, res, next) => {
    //storing id parameter
    var _id = req.params._id
    //use the selected id parameter to edit 
@@ -78,7 +89,8 @@ router.get('/edit/:_id', (req, res, next) => {
       else
       {
       res.render('products/edit',
-          { products: products  })
+          { products: products,
+            user: req.user  })
       }
    })
 })
@@ -86,7 +98,7 @@ router.get('/edit/:_id', (req, res, next) => {
 
 
 // POST /products/edit
-router.post('/edit/:_id', (req, res, next) =>
+router.post('/edit/:_id', isLoggedIn,(req, res, next) =>
 {
    var _id = req.params._id
 

@@ -3,11 +3,12 @@
 <form method="post">
     <fieldset class="form-group">
         <label class="control-label col-md-2"> Name: *</label>
-        <input name="name" id="name" required value="{{ products.name }}" />
+        <input name="name" id="name" value="{{ products.name }}" required/>
     </fieldset>  
    <fieldset class="form-group">
         <label class="control-label col-md-2"> Quantity: *</label>
         <select name="quantity" id="quantity" >
+             <option>Select quantity</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -23,6 +24,7 @@
     <fieldset class="form-group">
         <label class="control-label col-md-2"> Department: *</label>
         <select name="department" id="department" />
+            <option>Select department</option>
             <option>Food</option>
             <option>Electronics</option>
             <option>Home essentials</option>
