@@ -1,8 +1,18 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  background-color: aliceblue;
 }
 
-a {
-  color: #00B7FF;
+
+footer{
+
+  position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:rgb(255, 163, 102);
+   font-size: large;
+}
+nav{
+  padding:0px;
 }

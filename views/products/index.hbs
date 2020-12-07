@@ -1,36 +1,20 @@
-<h1>Our Products</h1> 
+<h1 class="d-flex flex-row justify-content-center">Our Products</h1> 
 {{#if user}}
-<a href="/products/add"> Add a New product</a>{{/if}}
-<table class="table table-striped table-hover">
-    <tr>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Department</th>
-        {{#if user}}
-        <th>Actions</th>
-        {{/if}}
-    </tr>
-    {{#if user}} 
-    {{#each products}}
-    <tr>
-        <td> {{this.name}} </td>
-        <td> {{this.quantity}} </td>
-        <td> {{this.department}} </td>
-        <td>
-            <a href="/products/edit/{{ this._id }}"> Edit </a>
-            <a href="/products/delete/{{ this._id }}" class="test-danger delete"> Delete </a>
-        </td>      
-    </tr>
-    {{/each}}
-    {{else}}
-    {{#each products}}
-    <tr>
-        <td> {{this.name}} </td>
-        <td> {{this.quantity}} </td>
-        <td> {{this.department}} </td>
-    </tr>
-    {{/each}}
-    {{/if}}  
-    
+<a href="/products/add" class="d-flex flex-row justify-content-center"> Add a New product</a>{{/if}}
+{{#each products}}
+<div class="d-flex flex-row justify-content-center">
+<div class="card p-2 m-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Quantity: {{this.quantity}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Department: {{this.department}}</h6>
+{{#if ../user}}
+     <a href="/products/edit/{{ this._id }}"> Edit </a>|
+     <a href="/products/delete/{{ this._id }}" class="text-danger delete"> Delete </a>
 
-</table>
+   {{/if}}
+  </div>
+</div>
+
+  {{/each}}
+</div>

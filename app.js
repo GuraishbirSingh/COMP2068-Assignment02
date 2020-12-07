@@ -14,7 +14,7 @@ const session = require('express-session')
 //const localStategy = require('passport-local').Strategy
 
 var app = express();
-
+const hbs = require('hbs');
 //Database try to connect and log a result
 const mongoose = require('mongoose')
 const globals = require('./config/globals')
@@ -64,6 +64,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+hbs.registerPartials(__dirname + '/views/partials');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);

@@ -24,7 +24,6 @@ router.get('/register',(req, res, next) => {
   //POST /Register
   router.post('/register', (req, res, next) => {
     //Use the User model with passport to try a new user
-    //passport-local-mongoose will salt and has password
     User.register(new User({
       username: req.body.username
     }), req.body.password, (err, user) => {
